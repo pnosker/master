@@ -12,6 +12,7 @@
 #include "ui_interface.h"
 #include "kernel.h"
 #include "zerocoin/Zerocoin.h"
+#include "bitcoinrpc.h"
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -255,7 +256,6 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 
 
 
-vericoin
 
 
 

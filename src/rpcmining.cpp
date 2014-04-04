@@ -44,6 +44,7 @@ Value getmininginfo(const Array& params, bool fHelp)
 
     uint64 nMinWeight = 0, nMaxWeight = 0, nWeight = 0;
     pwalletMain->GetStakeWeight(*pwalletMain, nMinWeight, nMaxWeight, nWeight);
+    uint64 nNetworkWeight_ = GetPoSKernelPS();
 
     Object obj, diff, weight;
     obj.push_back(Pair("blocks",        (int)nBestHeight));
@@ -66,7 +67,7 @@ Value getmininginfo(const Array& params, bool fHelp)
     weight.push_back(Pair("combined",  (uint64_t)nWeight));
     obj.push_back(Pair("stakeweight", weight));
 
-    obj.push_back(Pair("stakeinterest",    (uint64_t)COIN_YEAR_REWARD));
+    obj.push_back(Pair("stakeinterest",    (uint64_t)((log(nNetworkWeight_/20)/(1.4*log(80)))/100)));
     obj.push_back(Pair("testnet",       fTestNet));
     return obj;
 }

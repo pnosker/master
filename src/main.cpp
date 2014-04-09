@@ -2554,23 +2554,23 @@ bool LoadBlockIndex(bool fAllowNew)
 
         // MainNet:
 
-        //CBlock(hash=000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1e0fffff, nNonce=164482, vtx=1, vchBlockSig=)
-        //  Coinbase(hash=12630d16a9, nTime=1393221600, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
+        //CBlock(hash=00000b8668da80bfbda92a9c66682f16326f0c924b9629233325b6517bc77bc6, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=c94f7deb5b37c2a6a871a10aa60d946d7abee7f309c76c99a9bbb76f4cc93b81, nTime=1396995919, nBits=1e0fffff, nNonce=99491, vtx=1, vchBlockSig=)
+        //  Coinbase(hash=c94f7deb5b, nTime=1396995919, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+        //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a4c573820417072696c203230313420426974636f696e20616b696e20746f2074686520496e7465726e65742032302079656172732061676f2c206469676974616c2063757272656e6379206578656375746976652073617973)
         //    CTxOut(empty)
-        //  vMerkleTree: 12630d16a9
+        //  vMerkleTree: c94f7deb5b
 
         // TestNet:
-
-        //CBlock(hash=0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1f00ffff, nNonce=216178, vtx=1, vchBlockSig=)
-        //  Coinbase(hash=12630d16a9, nTime=1393221600, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
+        //CBlock(hash=0000bc5769efde881ee95b88dfe4d378d580d10a5e1bf8e1f7fd3844b418c920, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=c94f7deb5b37c2a6a871a10aa60d946d7abee7f309c76c99a9bbb76f4cc93b81, nTime=1396995919, nBits=1f00ffff, nNonce=159684, vtx=1, vchBlockSig=)
+        //  Coinbase(hash=c94f7deb5b, nTime=1396995919, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+        //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a4c573820417072696c203230313420426974636f696e20616b696e20746f2074686520496e7465726e65742032302079656172732061676f2c206469676974616c2063757272656e6379206578656375746976652073617973)
         //    CTxOut(empty)
-        //  vMerkleTree: 12630d16a9
+        //  vMerkleTree: c94f7deb5b
 
-        const char* pszTimestamp = "3 April 2014 Xapo founder says bitcoin could be worth $1 million in a decade";
+
+        const char* pszTimestamp = "8 April 2014 Bitcoin akin to the Internet 20 years ago, digital currency executive says";
         CTransaction txNew;
-        txNew.nTime = 1396646308;
+        txNew.nTime = 1396995919;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2580,13 +2580,47 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1396646308;
+        block.nTime    = 1396995919;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = !fTestNet ? 164482 : 216178;
+        block.nNonce   = !fTestNet ? 99491 : 159684;
 
         //// debug print
-        assert(block.hashMerkleRoot == uint256("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
+        printf("%s\n", block.GetHash().ToString().c_str());
+        printf("%s\n", hashGenesisBlock.ToString().c_str());
+        printf("%s\n", block.hashMerkleRoot.ToString().c_str());
+        assert(block.hashMerkleRoot == uint256("0xc94f7deb5b37c2a6a871a10aa60d946d7abee7f309c76c99a9bbb76f4cc93b81"));
         block.print();
+
+        // If genesis block hash does not match, then generate new genesis hash.
+        /*if (block.GetHash() != hashGenesisBlock)
+        {
+            printf("Searching for genesis block...\n");
+            // This will figure out a valid hash and Nonce if you're
+            // creating a different genesis block:
+            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+            uint256 thash;
+
+            while(true)
+            {
+                thash = scrypt_blockhash(BEGIN(block.nVersion));
+                if (thash <= hashTarget)
+                    break;
+                if ((block.nNonce & 0xFFF) == 0)
+                {
+                    printf("nonce %08X: hash = %s (target = %s)\n", block.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
+                }
+                ++block.nNonce;
+                if (block.nNonce == 0)
+                {
+                    printf("NONCE WRAPPED, incrementing time\n");
+                    ++block.nTime;
+                }
+            }
+            printf("block.nTime = %u \n", block.nTime);
+            printf("block.nNonce = %u \n", block.nNonce);
+            printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
+        }*/
+
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
         assert(block.CheckBlock());
 

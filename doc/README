@@ -17,3 +17,13 @@ the goal of providing a long-term energy-efficient scrypt-based crypto-currency.
 Built on the foundation of Bitcoin, PPCoin and VeriCoin, innovations such as proof-of-stake
 help further advance the field of crypto-currency.
 
+
+Quick Linux Build
+
+-All typical Dependencies for Debian Build (git is optional) and make command
+
+sudo apt-get install qt4-qmake libqt4-dev build-essential libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libdb++-dev libminiupnpc-dev libboost-all-dev libqrencode-dev git
+
+cd src
+make -f makefile.unix
+

@@ -66,8 +66,14 @@ Value getmininginfo(const Array& params, bool fHelp)
     weight.push_back(Pair("maximum",    (uint64_t)nMaxWeight));
     weight.push_back(Pair("combined",  (uint64_t)nWeight));
     obj.push_back(Pair("stakeweight", weight));
-
-    obj.push_back(Pair("stakeinterest",    (uint64_t)((log(nNetworkWeight_/20)/(1.4*log(80)))/100)));
+    if (nNetworkWeight_ == 0)
+    {
+        obj.push_back(Pair("stakeinterest",    (uint64_t)(0)));
+    }
+    else
+    {
+        obj.push_back(Pair("stakeinterest",    (uint64_t)((log(nNetworkWeight_/20)/(1.4*log(80)))/100)));
+    }
     obj.push_back(Pair("testnet",       fTestNet));
     return obj;
 }

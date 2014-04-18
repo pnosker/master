@@ -1,4 +1,4 @@
-VeriCoin 0.1 BETA
+VeriCoin 1.0 
 
 Copyright (c) 2014 VeriCoin Developers
 Copyright (c) 2013 NovaCoin Developers

@@ -986,7 +986,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, int64 nFees)
     }
     else
     {
-        nSubsidy = nCoinAge * ((log(nNetworkWeight_/20)/(1.4*log(80)))/100) * 33 / (365 * 33 + 8);
+        nSubsidy = nCoinAge * ((log(nNetworkWeight_/20)/(1.4*log(80)))*CENT) * 33 / (365 * 33 + 8);
     }
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRI64d"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);

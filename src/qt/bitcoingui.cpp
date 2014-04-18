@@ -909,11 +909,11 @@ void BitcoinGUI::updateStakingIcon()
 
     if (nLastCoinStakeSearchInterval && nWeight)
     {
-        uint64 nInterestRate;
+        float nInterestRate;
         uint64 nNetworkWeight = GetPoSKernelPS();
         if (nNetworkWeight == 0)
         {
-            nInterestRate = 0;
+            nInterestRate = 0.0;
         }
         else
         {
@@ -940,7 +940,7 @@ void BitcoinGUI::updateStakingIcon()
         }
 
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_on").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-        labelStakingIcon->setToolTip(tr("Staking.<br>Network Interest rate is %1<br>Your weight is %2<br>Network weight is %3<br>Expected time to earn reward is %4").arg(nInterestRate).arg(nWeight).arg(nNetworkWeight).arg(text));
+        labelStakingIcon->setToolTip(tr("Staking.<br>Network Interest rate is %1%<br>Your weight is %2<br>Network weight is %3<br>Expected time to earn reward is %4").arg(nInterestRate).arg(nWeight).arg(nNetworkWeight).arg(text));
     }
     else
     {

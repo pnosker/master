@@ -1,0 +1,30 @@
+src/*.exe
+src/vericoin
+src/vericoind
+src/test_vericoin
+src/build.h
+vericoin.files
+vericoin.creator
+vericoin.config
+vericoin.creator.user
+vericoin.includes
+vericoin-qt.pro.user
+.*.swp
+*.*~*
+*.bak
+*.rej
+*.orig
+*.o
+*.patch
+.vericoin
+#compilation and Qt preprocessor part
+*.qm
+Makefile
+#resources cpp
+qrc_*.cpp
+#qt creator
+*.pro.user
+#mac specific
+.DS_Store
+
+!src/leveldb/Makefile

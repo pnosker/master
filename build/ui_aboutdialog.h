@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'aboutdialog.ui'
 **
-** Created: Thu Apr 10 10:21:06 2014
+** Created: Fri Apr 18 16:11:26 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -76,7 +76,7 @@ public:
         versionLabel = new QLabel(AboutDialog);
         versionLabel->setObjectName(QString::fromUtf8("versionLabel"));
         versionLabel->setCursor(QCursor(Qt::IBeamCursor));
-        versionLabel->setText(QString::fromUtf8("0.1"));
+        versionLabel->setText(QString::fromUtf8("1.0"));
         versionLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         horizontalLayout->addWidget(versionLabel);
@@ -130,7 +130,8 @@ public:
         AboutDialog->setWindowTitle(QApplication::translate("AboutDialog", "About VeriCoin", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("AboutDialog", "<b>VeriCoin</b> version", 0, QApplication::UnicodeUTF8));
         copyrightLabel->setText(QApplication::translate("AboutDialog", "Copyright \302\251 2009-2014 The Bitcoin developers\n"
-"Copyright \302\251 2012-2014 The VeriCoin developers", 0, QApplication::UnicodeUTF8));
+"Copyright \302\251 2012-2014 The NovaCoin developers\n"
+"Copyright \302\251 2014 The VeriCoin developers", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("AboutDialog", "\n"
 "This is experimental software.\n"
 "\n"

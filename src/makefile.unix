@@ -200,5 +200,6 @@ clean:
 	-rm -f obj/*.P
 	-rm -f obj/zerocoin/*.P
 	-rm -f obj/build.h
+	cd leveldb; make clean; cd ..;
 
 FORCE:

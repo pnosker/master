@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'overviewpage.ui'
 **
-** Created: Mon Mar 31 09:19:56 2014
+** Created: Thu May 8 11:37:40 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -46,8 +46,9 @@ public:
     QLabel *labelUnconfirmed;
     QLabel *labelImmatureText;
     QLabel *labelImmature;
-    QLabel *label_2;
-    QLabel *labelNumTransactions;
+    QFrame *line;
+    QLabel *labelTotalText;
+    QLabel *labelTotal;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_3;
     QFrame *frame_2;
@@ -118,7 +119,7 @@ public:
         font1.setWeight(75);
         labelBalance->setFont(font1);
         labelBalance->setCursor(QCursor(Qt::IBeamCursor));
-        labelBalance->setText(QString::fromUtf8("0 VRC"));
+        labelBalance->setText(QString::fromUtf8("0 BC"));
         labelBalance->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_2->setWidget(0, QFormLayout::FieldRole, labelBalance);
@@ -132,7 +133,7 @@ public:
         labelStake->setObjectName(QString::fromUtf8("labelStake"));
         labelStake->setFont(font1);
         labelStake->setCursor(QCursor(Qt::IBeamCursor));
-        labelStake->setText(QString::fromUtf8("0 VRC"));
+        labelStake->setText(QString::fromUtf8("0 BC"));
         labelStake->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_2->setWidget(1, QFormLayout::FieldRole, labelStake);
@@ -146,7 +147,7 @@ public:
         labelUnconfirmed->setObjectName(QString::fromUtf8("labelUnconfirmed"));
         labelUnconfirmed->setFont(font1);
         labelUnconfirmed->setCursor(QCursor(Qt::IBeamCursor));
-        labelUnconfirmed->setText(QString::fromUtf8("0 VRC"));
+        labelUnconfirmed->setText(QString::fromUtf8("0 BC"));
         labelUnconfirmed->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_2->setWidget(2, QFormLayout::FieldRole, labelUnconfirmed);
@@ -159,21 +160,31 @@ public:
         labelImmature = new QLabel(frame);
         labelImmature->setObjectName(QString::fromUtf8("labelImmature"));
         labelImmature->setFont(font1);
-        labelImmature->setText(QString::fromUtf8("0 VRC"));
+        labelImmature->setText(QString::fromUtf8("0 BC"));
         labelImmature->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_2->setWidget(3, QFormLayout::FieldRole, labelImmature);
 
-        label_2 = new QLabel(frame);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        line = new QFrame(frame);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
 
-        formLayout_2->setWidget(4, QFormLayout::LabelRole, label_2);
+        formLayout_2->setWidget(4, QFormLayout::SpanningRole, line);
 
-        labelNumTransactions = new QLabel(frame);
-        labelNumTransactions->setObjectName(QString::fromUtf8("labelNumTransactions"));
-        labelNumTransactions->setText(QString::fromUtf8("0"));
+        labelTotalText = new QLabel(frame);
+        labelTotalText->setObjectName(QString::fromUtf8("labelTotalText"));
 
-        formLayout_2->setWidget(4, QFormLayout::FieldRole, labelNumTransactions);
+        formLayout_2->setWidget(5, QFormLayout::LabelRole, labelTotalText);
+
+        labelTotal = new QLabel(frame);
+        labelTotal->setObjectName(QString::fromUtf8("labelTotal"));
+        labelTotal->setFont(font1);
+        labelTotal->setCursor(QCursor(Qt::IBeamCursor));
+        labelTotal->setText(QString::fromUtf8("0 BTC"));
+        labelTotal->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout_2->setWidget(5, QFormLayout::FieldRole, labelTotal);
 
 
         verticalLayout_4->addLayout(formLayout_2);
@@ -251,11 +262,11 @@ public:
         OverviewPage->setWindowTitle(QApplication::translate("OverviewPage", "Form", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("OverviewPage", "Wallet", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        labelWalletStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the VeriCoin network after a connection is established, but this process has not completed yet.", 0, QApplication::UnicodeUTF8));
+        labelWalletStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the BlackCoin network after a connection is established, but this process has not completed yet.", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
-        label->setText(QApplication::translate("OverviewPage", "Balance:", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("OverviewPage", "Spendable:", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        labelBalance->setToolTip(QApplication::translate("OverviewPage", "Your current balance", 0, QApplication::UnicodeUTF8));
+        labelBalance->setToolTip(QApplication::translate("OverviewPage", "Your current spendable balance", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         label_6->setText(QApplication::translate("OverviewPage", "Stake:", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -269,13 +280,13 @@ public:
 #ifndef QT_NO_TOOLTIP
         labelImmature->setToolTip(QApplication::translate("OverviewPage", "Mined balance that has not yet matured", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
-        label_2->setText(QApplication::translate("OverviewPage", "Number of transactions:", 0, QApplication::UnicodeUTF8));
+        labelTotalText->setText(QApplication::translate("OverviewPage", "Total:", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        labelNumTransactions->setToolTip(QApplication::translate("OverviewPage", "Total number of transactions in wallet", 0, QApplication::UnicodeUTF8));
+        labelTotal->setToolTip(QApplication::translate("OverviewPage", "Your current total balance", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         label_4->setText(QApplication::translate("OverviewPage", "<b>Recent transactions</b>", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        labelTransactionsStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the VeriCoin network after a connection is established, but this process has not completed yet.", 0, QApplication::UnicodeUTF8));
+        labelTransactionsStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the BlackCoin network after a connection is established, but this process has not completed yet.", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
     } // retranslateUi
 

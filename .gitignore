@@ -1,3 +1,4 @@
+*~
 src/*.exe
 src/vericoin
 src/vericoind
@@ -8,6 +9,8 @@ vericoin.creator
 vericoin.config
 vericoin.creator.user
 vericoin.includes
+vericoin.*
+vericoin-qt.pro.*
 vericoin-qt.pro.user
 .*.swp
 *.*~*

@@ -133,7 +133,7 @@ vericoind.exe: $(OBJS:obj/%=obj/%)
 clean:
 	rm -f vericoind.exe
 	rm -f obj/*.o	
-	rm -f obj/zerocoin/*
+	rm -f obj/zerocoin/*.o
 	cd leveldb && $(MAKE) TARGET_OS=NATIVE_WINDOWS clean && cd ..
 
 FORCE:

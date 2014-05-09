@@ -101,6 +101,9 @@ OverviewPage::OverviewPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //QPixmap pix("src/qt/res/icons/logo_emboss.png");
+    //ui->logo_emboss->setPixmap(pix);
+
     // Recent transactions
     ui->listTransactions->setItemDelegate(txdelegate);
     ui->listTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));

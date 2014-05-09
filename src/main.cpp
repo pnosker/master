@@ -2577,7 +2577,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
         const char* pszTimestamp = "8 April 2014 Bitcoin akin to the Internet 20 years ago, digital currency executive says";
         CTransaction txNew;
-        txNew.nTime = 1396995919;
+        txNew.nTime = 1399577783;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2587,15 +2587,15 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1396995919;
+        block.nTime    = 1399577783;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = !fTestNet ? 99491 : 159684;
+        block.nNonce   = !fTestNet ? 222826 : 222826;
 
         //// debug print
-        printf("%s\n", block.GetHash().ToString().c_str());
-        printf("%s\n", hashGenesisBlock.ToString().c_str());
-        printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xc94f7deb5b37c2a6a871a10aa60d946d7abee7f309c76c99a9bbb76f4cc93b81"));
+        //printf("%s\n", block.GetHash().ToString().c_str());
+       // printf("%s\n", hashGenesisBlock.ToString().c_str());
+       // printf("%s\n", block.hashMerkleRoot.ToString().c_str());
+        assert(block.hashMerkleRoot == uint256("0xdfa61e2d52591ad8d9651216af8bc03fff96a97387457261d99d7ca82a62c242"));
         block.print();
 
         // If genesis block hash does not match, then generate new genesis hash.

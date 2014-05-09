@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'overviewpage.ui'
 **
-** Created: Thu May 8 11:37:40 2014
+** Created: Thu May 8 15:01:14 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -249,7 +249,6 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_3);
 
-        horizontalLayout->setStretch(0, 1);
         horizontalLayout->setStretch(1, 1);
 
         retranslateUi(OverviewPage);

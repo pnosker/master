@@ -2561,11 +2561,12 @@ bool LoadBlockIndex(bool fAllowNew)
 
         // MainNet:
 
-        //CBlock(hash=00000b8668da80bfbda92a9c66682f16326f0c924b9629233325b6517bc77bc6, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=c94f7deb5b37c2a6a871a10aa60d946d7abee7f309c76c99a9bbb76f4cc93b81, nTime=1396995919, nBits=1e0fffff, nNonce=99491, vtx=1, vchBlockSig=)
-        //  Coinbase(hash=c94f7deb5b, nTime=1396995919, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a4c573820417072696c203230313420426974636f696e20616b696e20746f2074686520496e7465726e65742032302079656172732061676f2c206469676974616c2063757272656e6379206578656375746976652073617973)
-        //    CTxOut(empty)
-        //  vMerkleTree: c94f7deb5b
+        //CBlock(hash=34125fc48033d7284178f16d16c0851e1cd75906e65b499cca66e5407c60ae65, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=60424046d38de827de0ed1a20a351aa7f3557e3e1d3df6bfb34a94bc6161ec68, nTime=1399690945, nBits=1e0fffff, nNonce=222826, vtx=1, vchBlockSig=)
+        //Coinbase(hash=60424046d3, nTime=1399690945, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+        //  CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a3639204d6179203230313420555320706f6c6974696369616e732063616e2061636365707420626974636f696e20646f6e6174696f6e73)
+        //  CTxOut(empty)
+        // vMerkleTree: 60424046d3
+
 
         // TestNet:
         //CBlock(hash=0000bc5769efde881ee95b88dfe4d378d580d10a5e1bf8e1f7fd3844b418c920, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=c94f7deb5b37c2a6a871a10aa60d946d7abee7f309c76c99a9bbb76f4cc93b81, nTime=1396995919, nBits=1f00ffff, nNonce=159684, vtx=1, vchBlockSig=)
@@ -2575,9 +2576,9 @@ bool LoadBlockIndex(bool fAllowNew)
         //  vMerkleTree: c94f7deb5b
 
 
-        const char* pszTimestamp = "8 April 2014 Bitcoin akin to the Internet 20 years ago, digital currency executive says";
+        const char* pszTimestamp = "9 May 2014 US politicians can accept bitcoin donations";
         CTransaction txNew;
-        txNew.nTime = 1399577783;
+        txNew.nTime = 1399690945;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2587,46 +2588,13 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1399577783;
+        block.nTime    = 1399690945;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = !fTestNet ? 222826 : 222826;
+        block.nNonce   = !fTestNet ? 612416 : 612416;
 
         //// debug print
-        //printf("%s\n", block.GetHash().ToString().c_str());
-       // printf("%s\n", hashGenesisBlock.ToString().c_str());
-       // printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xdfa61e2d52591ad8d9651216af8bc03fff96a97387457261d99d7ca82a62c242"));
+        assert(block.hashMerkleRoot == uint256("0x60424046d38de827de0ed1a20a351aa7f3557e3e1d3df6bfb34a94bc6161ec68"));
         block.print();
-
-        // If genesis block hash does not match, then generate new genesis hash.
-        /*if (block.GetHash() != hashGenesisBlock)
-        {
-            printf("Searching for genesis block...\n");
-            // This will figure out a valid hash and Nonce if you're
-            // creating a different genesis block:
-            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
-            uint256 thash;
-
-            while(true)
-            {
-                thash = scrypt_blockhash(BEGIN(block.nVersion));
-                if (thash <= hashTarget)
-                    break;
-                if ((block.nNonce & 0xFFF) == 0)
-                {
-                    printf("nonce %08X: hash = %s (target = %s)\n", block.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
-                }
-                ++block.nNonce;
-                if (block.nNonce == 0)
-                {
-                    printf("NONCE WRAPPED, incrementing time\n");
-                    ++block.nTime;
-                }
-            }
-            printf("block.nTime = %u \n", block.nTime);
-            printf("block.nNonce = %u \n", block.nNonce);
-            printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
-        }*/
 
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
         assert(block.CheckBlock());

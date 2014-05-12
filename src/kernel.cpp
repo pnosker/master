@@ -387,7 +387,6 @@ bool CheckStakeModifierCheckpoints(int nHeight, unsigned int nStakeModifierCheck
     MapModifierCheckpoints& checkpoints = (fTestNet ? mapStakeModifierCheckpointsTestNet : mapStakeModifierCheckpoints);
 
     if (checkpoints.count(nHeight))
-        //return nStakeModifierChecksum == checkpoints[nHeight];
-        return true;
+        return nStakeModifierChecksum == checkpoints[nHeight];
     return true;
 }

@@ -940,7 +940,7 @@ void BitcoinGUI::updateStakingIcon()
         }
 
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_on").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-        labelStakingIcon->setToolTip(tr("Staking.<br>Network interest rate is: %1%<br>Your stake is: %2<br>Network stake is: %3<br>Expected time to earn interest is: %4").arg(nInterestRate).arg(nWeight).arg(nNetworkWeight).arg(text));
+        labelStakingIcon->setToolTip(tr("Staking.<br>Network interest rate is: %1%<br>Network stake is: %2<br>Expected time to earn interest is: %3").arg(nInterestRate).arg(nNetworkWeight).arg(text));
     }
     else
     {

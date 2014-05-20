@@ -1151,9 +1151,10 @@ void MapPort()
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strDNSSeed[][2] = {
-    {"supernode1", "supernode.vericoin.info"},
-    {"supernode2", "supernode2.vericoin.info"},
-    {"supernode3", "supernode3.vericoin.info"},
+    {"dnsseed1", "dnsseed.vericoin.info"},
+    {"dnsseed2", "dnsseed2.vericoin.info"},
+    {"dnsseed3", "dnsseed3.vericoin.info"},
+    {"dnsseed4", "dnsseed.pnosker.com"},
 };
 
 void ThreadDNSAddressSeed(void* parg)

@@ -5,7 +5,7 @@
 CXX?= g++
 
 USE_UPNP:=-
-USE_IPV6:=1
+USE_IPV6:=0
 
 BOOST_SUFFIX?=-mgw48-mt-s-1_55
 

@@ -103,7 +103,7 @@ contains(USE_IPV6, -) {
     message(Building without IPv6 support)
 } else {
     count(USE_IPV6, 0) {
-        USE_IPV6=0
+        USE_IPV6=1
     }
     DEFINES += USE_IPV6=$$USE_IPV6
 }

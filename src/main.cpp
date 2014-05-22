@@ -980,7 +980,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, int64 nFees)
 {
     int64 nSubsidy;
     int64 nNetworkWeight_ = GetPoSKernelPS();
-    nSubsidy = nCoinAge * ((log(nNetworkWeight_/20)/(1.4*log(80)))*CENT) * 33 / (365 * 33 + 8);
+    nSubsidy = nCoinAge * ((log(nNetworkWeight_/20)/((1+(4/10))*log(80)))*CENT) * 33 / (365 * 33 + 8);
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRI64d"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
 
@@ -1608,7 +1608,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
         int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
 
-        if (nStakeReward > (nCalculatedStakeReward + (nCalculatedStakeReward*.01)))
+        if (nStakeReward > nCalculatedStakeReward)
             return DoS(100, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
     }
 

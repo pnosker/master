@@ -1608,8 +1608,8 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
         int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
 
-       // if (nStakeReward > nCalculatedStakeReward)
-       //     return DoS(100, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
+        if (nStakeReward > (nCalculatedStakeReward + (nCalculatedStakeReward*.01)))
+            return DoS(100, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
     }
 
     // ppcoin: track money supply and mint amount info

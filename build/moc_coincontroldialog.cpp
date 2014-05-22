@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'coincontroldialog.h'
 **
-** Created: Mon Mar 31 09:24:02 2014
+** Created: Wed May 21 17:16:06 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

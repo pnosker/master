@@ -978,9 +978,16 @@ int64 GetProofOfWorkReward(int64 nFees)
 // miner's coin stake reward based on coin age spent (coin-days)
 int64 GetProofOfStakeReward(int64 nCoinAge, int64 nFees)
 {
-    int64 nSubsidy;
+    double nSubsidy;
     int64 nNetworkWeight_ = GetPoSKernelPS();
-    nSubsidy = nCoinAge * ((log(nNetworkWeight_/20)/(1.4*log(80)))*CENT) * 33 / (365 * 33 + 8);
+    if(nNetworkWeight_ == 0)
+    {
+        nSubsidy = 0;
+    }
+    else
+    {
+        nSubsidy = nCoinAge * ((log(nNetworkWeight_/20)/(1.4*log(80)))*CENT) * 33 / (365 * 33 + 8);
+    }
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRI64d"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
 
@@ -1604,12 +1611,12 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         // ppcoin: coin stake tx earns reward instead of paying fee
         uint64 nCoinAge;
         if (!vtx[1].GetCoinAge(txdb, nCoinAge))
-            return error("ConnectBlock() : %s unable to get coin age for coinstake", vtx[1].GetHash().ToString().substr(0,10).c_str());
+            return error("() : %s unable to get coin age for coinstake", vtx[1].GetHash().ToString().substr(0,10).c_str());
 
-        //int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
+        int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
 
-        //if (nStakeReward > nCalculatedStakeReward)
-            //return DoS(100, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
+        if (nStakeReward > nCalculatedStakeReward)
+           return DoS(100, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
     }
 
     // ppcoin: track money supply and mint amount info

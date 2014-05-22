@@ -112,7 +112,7 @@ DEFS += $(addprefix -I,leveldb/include)
 DEFS += $(addprefix -I,leveldb/helpers)
 OBJS += obj/txdb-leveldb.o
 leveldb/libleveldb.a:
-	cd leveldb && $(MAKE) CC=$(CC) CXX=$(CXX) OPT="$(CFLAGS)" TARGET_OS=NATIVE_WINDOWS libleveldb.a libmemenv.a && cd ..
+	cd leveldb && make TARGET_OS=NATIVE_WINDOWS libleveldb.a libmemenv.a && cd ..
 obj/txdb-leveldb.o: leveldb/libleveldb.a
 
 obj/%.o: %.cpp $(HEADERS)
@@ -134,6 +134,6 @@ clean:
 	rm -f vericoind.exe
 	rm -f obj/*.o	
 	rm -f obj/zerocoin/*.o
-	cd leveldb && $(MAKE) TARGET_OS=NATIVE_WINDOWS clean && cd ..
+	cd leveldb && make TARGET_OS=NATIVE_WINDOWS clean && cd ..
 
 FORCE:

@@ -72,7 +72,7 @@ Value getmininginfo(const Array& params, bool fHelp)
     }
     else
     {
-        obj.push_back(Pair("stakeinterest",    (uint64_t)((log(nNetworkWeight_/20)/(1.4*log(80)))/100)));
+        obj.push_back(Pair("stakeinterest",    (double_t)(log(nNetworkWeight_/20)/(1.4*log(80)))));
     }
     obj.push_back(Pair("testnet",       fTestNet));
     return obj;

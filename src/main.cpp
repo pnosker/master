@@ -33,6 +33,7 @@ CCriticalSection cs_main;
 CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
+
 map<uint256, CBlockIndex*> mapBlockIndex;
 set<pair<COutPoint, unsigned int> > setStakeSeen;
 libzerocoin::Params* ZCParams;
@@ -45,6 +46,7 @@ unsigned int nTargetSpacing = 1 * 60; // 1 minute
 unsigned int nStakeMinAge = 8 * 60 * 60; // 8 hours
 unsigned int nStakeMaxAge = -1; // unlimited
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
+double nStakeSubsidyBuffer= 1.33;
 
 int nCoinbaseMaturity = 500;
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -978,7 +980,7 @@ int64 GetProofOfWorkReward(int64 nFees)
 // miner's coin stake reward based on coin age spent (coin-days)
 int64 GetProofOfStakeReward(int64 nCoinAge, int64 nFees)
 {
-    double nSubsidy;
+    int64 nSubsidy;
     int64 nNetworkWeight_ = GetPoSKernelPS();
     if(nNetworkWeight_ == 0)
     {
@@ -986,7 +988,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, int64 nFees)
     }
     else
     {
-        nSubsidy = nCoinAge * ((log(nNetworkWeight_/20)/(1.4*log(80)))*CENT) * 33 / (365 * 33 + 8);
+        nSubsidy = (int64)(nCoinAge * ((log(nNetworkWeight_/20)/(2.6643))*CENT) * 33 / (365 * 33 + 8));
     }
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRI64d"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
@@ -1615,7 +1617,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
         int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
 
-        if (nStakeReward > nCalculatedStakeReward)
+        if (nStakeReward > (nCalculatedStakeReward*nStakeSubsidyBuffer))
            return DoS(100, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
     }
 

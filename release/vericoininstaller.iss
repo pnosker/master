@@ -12,7 +12,7 @@
 #define ProgramName "VeriCoin"
 
 ; Enter the Version Number of your binaries
-#define VersionNumber "1.1.3"
+#define VersionNumber "1.2"
 
 ; Enter the Name of the Folder created in \Appdata\Roaming where your binaries will place the user files, including wallet, conf file, blockchain info etc.
 #define RoamingName "VeriCoin"
@@ -106,4 +106,4 @@ begin
 end;
 
 [Run]
-Filename: "{app}\{#QTexe} -connect=supernode.vericoin.info"; Flags: postinstall skipifsilent nowait
+Filename: "{app}\{#QTexe}"; Flags: postinstall skipifsilent nowait

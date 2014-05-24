@@ -1620,7 +1620,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
         //cout << " " << nCalculatedStakeReward << " " << nStakeReward << endl;
         if (nStakeReward > nCalculatedStakeReward)
-           return DoS(100, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
+           return DoS(50, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
     }
 
     // ppcoin: track money supply and mint amount info
@@ -2577,7 +2577,7 @@ bool LoadBlockIndex(bool fAllowNew)
         //  Coinbase(hash=c94f7deb5b, nTime=1396995919, ver=1, vin.size=1, vout.size=1, nLockTime=0)
         //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a4c573820417072696c203230313420426974636f696e20616b696e20746f2074686520496e7465726e65742032302079656172732061676f2c206469676974616c2063757272656e6379206578656375746976652073617973)
         //    CTxOut(empty)
-        //  vMerkleTree: c94f7deb5b
+        //  vMerkleTree: c94f7deb5bco
 
 
         const char* pszTimestamp = "9 May 2014 US politicians can accept bitcoin donations";

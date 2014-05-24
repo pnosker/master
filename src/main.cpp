@@ -1586,12 +1586,16 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
             int64 nTxValueIn = tx.GetValueIn(mapInputs);
             int64 nTxValueOut = tx.GetValueOut();
+            if (tx.IsCoinStake())
+            {
+                nTxValueOut = nTxValueOut*0.98;
+                nStakeReward = nTxValueOut - nTxValueIn;
+            }
             nValueIn += nTxValueIn;
             nValueOut += nTxValueOut;
             if (!tx.IsCoinStake())
                 nFees += nTxValueIn - nTxValueOut;
-            if (tx.IsCoinStake())
-                nStakeReward = nTxValueOut - nTxValueIn;
+
            // cout << " " << nTxValueIn << " " << nTxValueOut << " ";
 
             if (!tx.ConnectInputs(txdb, mapInputs, mapQueuedChanges, posThisTx, pindex, true, false))
@@ -1619,7 +1623,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
         int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
         //cout << " " << nCalculatedStakeReward << " " << nStakeReward << endl;
-        if (nStakeReward > (nCalculatedStakeReward*1.01))
+        if (nStakeReward > nCalculatedStakeReward)
            return DoS(50, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
     }
 

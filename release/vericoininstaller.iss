@@ -45,7 +45,6 @@ OutputDir=SETUP
 
 [Files]
 Source: "*"; DestDir: "{app}"; Components: main; Excludes: "*.iss"
-Source: {#SubDir}\*; DestDir: "{app}\{#SubDir}"; Components: daemon
 Source: {#configfile}; DestDir: "{userappdata}\{#RoamingName}"; Components: config; Flags: uninsneveruninstall
 Source: {#bootstrapfile}; DestDir: "{userappdata}\{#RoamingName}"; Components: bootstrap;
 

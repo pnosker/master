@@ -1619,7 +1619,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
         int64 nCalculatedStakeReward = GetProofOfStakeReward(nCoinAge, nFees);
         //cout << " " << nCalculatedStakeReward << " " << nStakeReward << endl;
-        if (nStakeReward > nCalculatedStakeReward)
+        if (nStakeReward > (nCalculatedStakeReward*1.01))
            return DoS(50, error("ConnectBlock() : coinstake pays too much(actual=%"PRI64d" vs calculated=%"PRI64d")", nStakeReward, nCalculatedStakeReward));
     }
 

@@ -99,16 +99,16 @@ Value getinfo(const Array& params, bool fHelp)
     return obj;
 }
 
-//string getinterestrate(const Value& value, bool fHelp)
-//{
-//   if (fHelp || params.size() != 0)
-//        throw runtime_error(
-//            "getinterestrate\n"
-//            "Returns the current network interest rate.");
-//
-//    return (0.17*(log(GetPoSKernelPS()/20))));
-//
-//}
+string getinterestrate(const Value& value, bool fHelp)
+{
+   if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "getinterestrate\n"
+            "Returns the current network interest rate.");
+
+    return (0.17*(log(GetPoSKernelPS()/20))));
+
+}
 
 Value getnewpubkey(const Array& params, bool fHelp)
 {

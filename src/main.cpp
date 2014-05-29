@@ -46,6 +46,7 @@ unsigned int nTargetSpacing = 1 * 60; // 1 minute
 unsigned int nStakeMinAge = 8 * 60 * 60; // 8 hours
 unsigned int nStakeMaxAge = -1; // unlimited
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
+double nNetworkDriftBuffer;
 
 int nCoinbaseMaturity = 500;
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -987,7 +988,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, int64 nFees)
     }
     else
     {
-        nSubsidy = (int64)(nCoinAge * ((log(nNetworkWeight_/20)/(2.6643))*CENT) * 33 / (365 * 33 + 8));
+        nSubsidy = (int64)(nCoinAge * ((0.17*(log(nNetworkWeight_/20)))*CENT) * 33 / (365 * 33 + 8));
 
         //cout << nNetworkWeight_ << " " << nSubsidy;
     }
@@ -1588,7 +1589,8 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
             int64 nTxValueOut = tx.GetValueOut();
             if (tx.IsCoinStake())
             {
-                nTxValueOut = nTxValueOut*0.98;
+                nNetworkDriftBuffer = nTxValueOut*.02;
+                nTxValueOut = nTxValueOut-nNetworkDriftBuffer;
                 nStakeReward = nTxValueOut - nTxValueIn;
             }
             nValueIn += nTxValueIn;

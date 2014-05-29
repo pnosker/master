@@ -917,7 +917,7 @@ void BitcoinGUI::updateStakingIcon()
         }
         else
         {
-            nInterestRate = (log(nNetworkWeight/20)/(1.4*log(80)));
+            nInterestRate = (0.17*(log(nNetworkWeight/20)));
         }
         unsigned nEstimateTime = nTargetSpacing * nNetworkWeight / nWeight;
 

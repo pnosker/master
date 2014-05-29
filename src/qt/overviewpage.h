@@ -47,6 +47,10 @@ private:
 private slots:
     void updateDisplayUnit();
     void handleTransactionClicked(const QModelIndex &index);
+    void on_BTCtalkbutton_clicked();
+    void on_IRCbutton_clicked();
+    void on_redditButton_clicked();
+    void on_twitterButton_clicked();
 };
 
 #endif // OVERVIEWPAGE_H

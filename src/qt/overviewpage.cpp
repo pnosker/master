@@ -11,6 +11,8 @@
 
 #include <QAbstractItemDelegate>
 #include <QPainter>
+#include <QDesktopServices>
+#include <QUrl>
 
 #define DECORATION_SIZE 64
 #define NUM_ITEMS 3
@@ -205,4 +207,26 @@ void OverviewPage::showOutOfSyncWarning(bool fShow)
 {
     ui->labelWalletStatus->setVisible(fShow);
     ui->labelTransactionsStatus->setVisible(fShow);
+}
+
+//Links button grid
+void OverviewPage::on_BTCtalkbutton_clicked()
+{
+    QString link="https://bitcointalk.org/index.php?topic=602041.0";
+    QDesktopServices::openUrl(QUrl(link));
+}
+void OverviewPage::on_IRCbutton_clicked()
+{
+    QString link="http://webchat.freenode.net/?channels=%23vericoin&uio=d4";
+    QDesktopServices::openUrl(QUrl(link));
+}
+void OverviewPage::on_redditButton_clicked()
+{
+    QString link="http://www.reddit.com/r/vericoin";
+    QDesktopServices::openUrl(QUrl(link));
+}
+void OverviewPage::on_twitterButton_clicked()
+{
+    QString link="https://twitter.com/vericoin";
+    QDesktopServices::openUrl(QUrl(link));
 }

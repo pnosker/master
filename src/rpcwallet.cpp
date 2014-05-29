@@ -85,6 +85,7 @@ Value getinfo(const Array& params, bool fHelp)
 
     diff.push_back(Pair("proof-of-work",  GetDifficulty()));
     diff.push_back(Pair("proof-of-stake", GetDifficulty(GetLastBlockIndex(pindexBest, true))));
+    
     obj.push_back(Pair("difficulty",    diff));
 
     obj.push_back(Pair("testnet",       fTestNet));
@@ -98,6 +99,21 @@ Value getinfo(const Array& params, bool fHelp)
     return obj;
 }
 
+Value getinterestrate(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "getinterestrate\n"
+            "Returns the current network interest rate.");
+
+    proxyType proxy;
+    GetProxy(NET_IPV4, proxy);
+
+    Object obj, diff;
+    diff.push_back(Pair((0.17*(log(nNetworkWeight/20)))));
+
+    return obj;
+}
 
 Value getnewpubkey(const Array& params, bool fHelp)
 {

@@ -109,7 +109,7 @@ Value getinterestrate(const Array& params, bool fHelp)
     proxyType proxy;
     GetProxy(NET_IPV4, proxy);
     
-    double nNetworkWeight = GetPoSKernelPS();
+    nNetworkWeight = GetPoSKernelPS();
     
     Object obj, diff;
     diff.push_back(Pair((0.17*(log(nNetworkWeight/20)))));
